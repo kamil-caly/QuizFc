@@ -99,7 +99,7 @@ namespace QuizFc.FootballWebScraper
 
             // losujemy zawodnika ze strony
             int playersCount = htmlDoc.QuerySelectorAll("table.items > tbody > tr").Count();
-            int playerIdx = random.Next(0, playersCount + 1);
+            int playerIdx = random.Next(0, playersCount);
             var randomPlayerTR = htmlDoc.QuerySelectorAll("table.items > tbody > tr")[playerIdx];
 
             return GetPlayerFromHtmlNode(randomPlayerTR);
@@ -147,37 +147,9 @@ namespace QuizFc.FootballWebScraper
         {
             Player player1;
             Player player2;
-            int maxAttemptsPlayer1 = 3;
-            int maxAttemptsPlayer2 = 3;
+            player1 = await GetRandomPlayer();
+            player2 = await GetRandomPlayer(player1.MarketValue);
 
-            while (true)
-            {
-                try
-                {
-                    player1 = await GetRandomPlayer();
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    if (maxAttemptsPlayer1 <= 0) throw ex;
-                    maxAttemptsPlayer1--;
-                }
-            }
-
-            while (true)
-            {
-                try
-                {
-                    player2 = await GetRandomPlayer(player1.MarketValue);
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    if (maxAttemptsPlayer2 <= 0) throw ex;
-                    maxAttemptsPlayer2--;
-                }
-            }
-            
             return (player1, player2);
         }
     }

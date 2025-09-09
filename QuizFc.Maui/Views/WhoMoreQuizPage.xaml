@@ -195,7 +195,7 @@
                                    FontAttributes="Bold"
                                    FontSize="16"
                                    Margin="0, 0, 16, 0"/>
-                            <Frame WidthRequest="140"                                                                    
+                            <Frame WidthRequest="110"                                                                    
                                    HeightRequest="50"
                                    BorderColor="{StaticResource BorderPink}"
                                    CornerRadius="50"
@@ -290,7 +290,7 @@
                                    FontAttributes="Bold"
                                    FontSize="16"
                                    Margin="0, 0, 16, 0"/>
-                            <Frame WidthRequest="140"                                                                    
+                            <Frame WidthRequest="110"                                                                    
                                    HeightRequest="50"
                                    BorderColor="{StaticResource BorderPink}"
                                    CornerRadius="50"
