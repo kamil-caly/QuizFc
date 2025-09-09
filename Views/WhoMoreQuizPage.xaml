@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuizFc.Views.WhoMoreQuizPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:local="clr-namespace:QuizFc.Components"
+             Background="{StaticResource BackgroundPrimary}">
+    <VerticalStackLayout>
+        <!-- Navbar jako osobny komponent -->
+        <local:Navbar />
+
+        <HorizontalStackLayout Padding="20, 20, 0, 0">
+            <!-- Strzałka powrótu do MainPage -->
+            <Frame HasShadow="False"
+                   HeightRequest="50"
+                   WidthRequest="80"
+                   Background="{StaticResource Red}"
+                   CornerRadius="20"
+                   BackgroundColor="{StaticResource White}">
+                <Frame HasShadow="False"
+                   CornerRadius="50"
+                   HeightRequest="28"
+                   WidthRequest="28"
+                   BorderColor="{StaticResource White}"
+                   BackgroundColor="{StaticResource White}">
+                    <Image HeightRequest="30"
+                           WidthRequest="30"
+                           Source="arrow_back_red.svg"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                    </Image>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBackArrowClick"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackArrowClick"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Punktacja -->
+            <Frame HasShadow="False"
+                   Margin="20, 0, 0, 0"
+                   HeightRequest="50"
+                   WidthRequest="70"
+                   Background="{StaticResource Yellow}"
+                   CornerRadius="20"
+                   BackgroundColor="white">
+                <Grid HeightRequest="50" 
+                      WidthRequest="70"
+                      ColumnDefinitions="*, *">
+                    <Frame HeightRequest="48"
+                           WidthRequest="40"
+                           CornerRadius="20"
+                           BorderColor="{StaticResource White}"
+                           BackgroundColor="{StaticResource White}">
+                        <Image HeightRequest="20"
+                               WidthRequest="20"
+                               BackgroundColor="{StaticResource White}"
+                               Source="trophy_black.svg"/>
+                    </Frame>
+                    <Label x:Name="ScoreLabel"                           
+                           Grid.Column="1"
+                           TextColor="{StaticResource TextPrimary}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                </Grid>
+            </Frame>
+
+            <!-- Pozostałe życia -->
+            <Frame HasShadow="False"
+                   Margin="4, 0, 0, 0"
+                   HeightRequest="50"
+                   WidthRequest="70"
+                   Background="{StaticResource Green}"
+                   CornerRadius="20"
+                   BackgroundColor="{StaticResource White}">
+                <Grid HeightRequest="50" 
+                      WidthRequest="70"
+                      ColumnDefinitions="*, *">
+                    <Frame HeightRequest="48"
+                           WidthRequest="40"
+                           CornerRadius="20"
+                           BorderColor="{StaticResource White}"
+                           BackgroundColor="{StaticResource White}">
+                        <Image HeightRequest="20"
+                               WidthRequest="20"
+                               BackgroundColor="{StaticResource White}"
+                               Source="heart_black.svg"/>
+                    </Frame>
+                    <Label x:Name="LifeLabel"
+                           Grid.Column="1"
+                           TextColor="{StaticResource TextPrimary}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                </Grid>
+            </Frame>
+        </HorizontalStackLayout>
+
+        <!-- Info o quiz'ie -->
+        <Frame Margin="40, 30, 40, 0" 
+               Padding="16"
+               CornerRadius="50">
+            <VerticalStackLayout BackgroundColor="{StaticResource BackgroundPrimary}">
+                <Label Text="Wskaż, który piłkarz jest"
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource White}"
+                       FontSize="22"
+                       FontAttributes="Bold"/>
+                <Label Text="droższy"
+                       HorizontalOptions="Center"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextYellow}"/>
+            </VerticalStackLayout>
+        </Frame>
+        
+        <!-- Zawodnicy do wyboru -->
+        <Grid RowDefinitions="*, 224, *, 224, *"
+              HeightRequest="540"
+              Padding="40, 0">
+            <Grid Grid.Row="1">
+                <!-- Pierwszy zawodnik -->
+                <Frame x:Name="FirstCardFrame"
+                       CornerRadius="30"
+                       IsVisible="False">
+                    <Grid RowDefinitions="140, *"                        
+                          HeightRequest="224"
+                          WidthRequest="328">
+                        <Image x:Name="FirstPlayerCardImg"
+                               Grid.RowSpan="2"                               
+                               Source="player_card_purple.png"
+                               Aspect="Fill"/>
+
+                        <!-- Górna sekcja -->
+                        <FlexLayout Grid.Row="0"
+                                    AlignItems="Center"
+                                    JustifyContent="SpaceEvenly">
+                            <!-- Twarz -->
+                            <Frame HeightRequest="110"
+                                   WidthRequest="110"
+                                   CornerRadius="24">
+                                <Image Source="https://img.a.transfermarkt.technology/portrait/big/937958-1746563945.jpg"
+                                       x:Name="FaceImgP1"
+                                       HeightRequest="110"
+                                       Aspect="AspectFill"
+                                       WidthRequest="110"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="FirstPlayerOnClick"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Narodowość -->
+                            <Frame HeightRequest="70"
+                                   WidthRequest="70"
+                                   BorderColor="{StaticResource BorderOpacityWhite}"
+                                   BackgroundColor="{StaticResource BackgroundOpacityWhite}"                                   
+                                   CornerRadius="24">
+                                <Image Source="https://tmssl.akamaized.net//images/wappen/big/281.png"
+                                       x:Name="NationalityImgP1"
+                                       HeightRequest="30"                                       
+                                       WidthRequest="30"
+                                       Aspect="AspectFit"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="FirstPlayerOnClick"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Klub -->
+                            <Frame HeightRequest="70"
+                                   WidthRequest="70"
+                                   BorderColor="{StaticResource BorderOpacityWhite}"
+                                    BackgroundColor="{StaticResource BackgroundOpacityWhite}"                                    
+                                   CornerRadius="24">
+                                <Image x:Name="ClubImgP1"
+                                       HeightRequest="40"                                       
+                                       WidthRequest="40"
+                                       Aspect="AspectFit"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="FirstPlayerOnClick"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </FlexLayout>
+
+                        <!-- Dolna sekcja -->
+                        <FlexLayout Grid.Row="1"
+                                    AlignItems="Center"
+                                    JustifyContent="Center">
+                            <Label Text="?"
+                                   x:Name="NameP1"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   Margin="0, 0, 16, 0"/>
+                            <Frame WidthRequest="140"                                                                    
+                                   HeightRequest="50"
+                                   BorderColor="{StaticResource BorderPink}"
+                                   CornerRadius="50"
+                                   Padding="0">
+                                <Label Text="?"
+                                       x:Name="MarketValueP1"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"                                       
+                                       BackgroundColor="{StaticResource BackgroundPrimary}"
+                                       FontAttributes="Bold"
+                                       FontSize="20"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="FirstPlayerOnClick"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </FlexLayout>
+                    </Grid>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="FirstPlayerOnClick"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+            <!-- Drugi zawodnik -->
+            <Grid Grid.Row="3">
+                <Frame x:Name="SecondCardFrame"
+                       CornerRadius="30"
+                       IsVisible="False">
+                    <Grid RowDefinitions="140, *"                        
+                          HeightRequest="224"
+                          WidthRequest="328">
+                        <Image x:Name="SecondPlayerCardImg"
+                               Grid.RowSpan="2"
+                               Source="player_card_purple.png"
+                               Aspect="Fill"/>
+
+                        <!-- Górna sekcja -->
+                        <FlexLayout Grid.Row="0"
+                                    AlignItems="Center"
+                                    JustifyContent="SpaceEvenly">
+                            <!-- Twarz -->
+                            <Frame HeightRequest="110"
+                                   WidthRequest="110"
+                                   CornerRadius="24">
+                                <Image x:Name="FaceImgP2"
+                                       HeightRequest="110"
+                                       Aspect="AspectFill"
+                                       WidthRequest="110"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="SecondPlayerOnClick"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Narodowość -->
+                            <Frame HeightRequest="70"
+                                   WidthRequest="70"
+                                   BorderColor="{StaticResource BorderOpacityWhite}"
+                                   BackgroundColor="{StaticResource BackgroundOpacityWhite}"                                    
+                                   CornerRadius="24">
+                                <Image x:Name="NationalityImgP2"
+                                       HeightRequest="30"                                       
+                                       WidthRequest="30"
+                                       Aspect="AspectFit"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="SecondPlayerOnClick"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <!-- Klub -->
+                            <Frame HeightRequest="70"
+                                   WidthRequest="70"
+                                   BorderColor="{StaticResource BorderOpacityWhite}"
+                                    BackgroundColor="{StaticResource BackgroundOpacityWhite}"                                    
+                                   CornerRadius="24">
+                                <Image x:Name="ClubImgP2"
+                                       HeightRequest="40"                                       
+                                       WidthRequest="40"
+                                       Aspect="AspectFit"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="SecondPlayerOnClick"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </FlexLayout>
+
+                        <!-- Dolna sekcja -->
+                        <FlexLayout Grid.Row="1"
+                                    AlignItems="Center"
+                                    JustifyContent="Center">
+                            <Label Text="?"
+                                   x:Name="NameP2"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   Margin="0, 0, 16, 0"/>
+                            <Frame WidthRequest="140"                                                                    
+                                   HeightRequest="50"
+                                   BorderColor="{StaticResource BorderPink}"
+                                   CornerRadius="50"
+                                   Padding="0">
+                                <Label Text="?"
+                                       x:Name="MarketValueP2"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"                                       
+                                       BackgroundColor="{StaticResource BackgroundPrimary}"
+                                       FontAttributes="Bold"
+                                       FontSize="20"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="SecondPlayerOnClick"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </FlexLayout>
+                    </Grid>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SecondPlayerOnClick"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+        </Grid>
+        
+    </VerticalStackLayout>
+</ContentPage>

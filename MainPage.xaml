@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuizFc.MainPage"
+             xmlns:local="clr-namespace:QuizFc.Components"
+             Background="#131313">
+    <ScrollView>
+        <VerticalStackLayout>
+            <!-- Navbar jako osobny komponent -->
+            <local:Navbar />
+
+            <VerticalStackLayout Padding="20,20,20,0" Spacing="20">
+                <Frame HasShadow="False"
+                       Padding="20"
+                       CornerRadius="20"
+                       BackgroundColor="#161616">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="74" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="94" />
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="who_more.png"
+                               HeightRequest="94"
+                               WidthRequest="94"
+                               Grid.RowSpan="2"
+                               Grid.Column="0"/>
+                        <VerticalStackLayout Grid.RowSpan="2" 
+                                             Grid.Column="2"
+                                             VerticalOptions="Center">
+                            <Label Text="KTO WIĘCEJ?"
+                               TextColor="White"
+                               FontSize="20"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" />
+                            <Label Text="Wskaż, który piłkarz jest starszy, droższy lub wyższy"
+                               TextColor="White"
+                               FontSize="16"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnWhoMoreQuizClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
