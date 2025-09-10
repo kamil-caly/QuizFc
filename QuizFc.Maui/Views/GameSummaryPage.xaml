@@ -4,12 +4,47 @@
              x:Class="QuizFc.Views.GameSummaryPage"
              Title="GameSummaryPage"
              Background="{StaticResource BackgroundPrimary}">
+    
     <VerticalStackLayout VerticalOptions="Center"
                          HorizontalOptions="Center"
-                         Spacing="10">
+                         Spacing="30">
+        
         <Label Text="Podsumowanie"
-               FontSize="24"
+               HorizontalOptions="Center"
+               FontSize="30"
                FontAttributes="Bold"
                TextColor="{StaticResource TextSecondary}" />
+
+        <Frame HasShadow="False"             
+               HeightRequest="50"
+               WidthRequest="320"
+               Background="{StaticResource Yellow}"
+               CornerRadius="20"
+               BackgroundColor="{StaticResource White}">
+            <Grid HeightRequest="50" 
+                  WidthRequest="360"
+                  ColumnDefinitions="280, 60">
+                <Frame Grid.Column="0"                                             
+                       CornerRadius="20">
+                    <Label Text="Wynik"
+                           HeightRequest="50"
+                           VerticalTextAlignment="Center"
+                           Margin="0 0 0 40"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextPrimary}"/>
+                </Frame>
+                <Label x:Name="ScoreLabel"
+                       Text="1"                       
+                       Grid.Column="1"
+                       TextColor="{StaticResource TextPrimary}"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"/>
+            </Grid>
+        </Frame>
+        
     </VerticalStackLayout>
+    
 </ContentPage>

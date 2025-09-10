@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuizFc.MainPage"
              xmlns:local="clr-namespace:QuizFc.Components"
-             Background="#131313">
+             Background="{StaticResource BackgroundPrimary}">
     <ScrollView>
         <VerticalStackLayout>
             <!-- Navbar jako osobny komponent -->
@@ -13,7 +13,7 @@
                 <Frame HasShadow="False"
                        Padding="20"
                        CornerRadius="20"
-                       BackgroundColor="#161616">
+                       BackgroundColor="{StaticResource BackgroundSecondary}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30" />

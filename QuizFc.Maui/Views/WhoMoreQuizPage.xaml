@@ -4,7 +4,7 @@
              x:Class="QuizFc.Views.WhoMoreQuizPage"
              NavigationPage.HasNavigationBar="False"
              xmlns:local="clr-namespace:QuizFc.Components"
-             Background="{StaticResource BackgroundPrimary}">
+             Background="{StaticResource BackgroundSecondary}">
     <VerticalStackLayout>
         <!-- Navbar jako osobny komponent -->
         <local:Navbar />
@@ -104,8 +104,9 @@
         <!-- Info o quiz'ie -->
         <Frame Margin="40, 30, 40, 0" 
                Padding="16"
+               BackgroundColor="{StaticResource BackgroundPrimary}"
                CornerRadius="50">
-            <VerticalStackLayout BackgroundColor="{StaticResource BackgroundPrimary}">
+            <VerticalStackLayout>
                 <Label Text="Wskaż, który piłkarz jest"
                        HorizontalOptions="Center"
                        TextColor="{StaticResource White}"
@@ -197,14 +198,14 @@
                                    Margin="0, 0, 16, 0"/>
                             <Frame WidthRequest="110"                                                                    
                                    HeightRequest="50"
+                                   BackgroundColor="{StaticResource BackgroundPrimary}"
                                    BorderColor="{StaticResource BorderPink}"
                                    CornerRadius="50"
                                    Padding="0">
                                 <Label Text="?"
                                        x:Name="MarketValueP1"
                                        HorizontalOptions="Center"
-                                       VerticalOptions="Center"                                       
-                                       BackgroundColor="{StaticResource BackgroundPrimary}"
+                                       VerticalOptions="Center"                                                                           
                                        FontAttributes="Bold"
                                        FontSize="20"/>
                                 <Frame.GestureRecognizers>
@@ -292,14 +293,14 @@
                                    Margin="0, 0, 16, 0"/>
                             <Frame WidthRequest="110"                                                                    
                                    HeightRequest="50"
+                                   BackgroundColor="{StaticResource BackgroundPrimary}"
                                    BorderColor="{StaticResource BorderPink}"
                                    CornerRadius="50"
                                    Padding="0">
                                 <Label Text="?"
                                        x:Name="MarketValueP2"
                                        HorizontalOptions="Center"
-                                       VerticalOptions="Center"                                       
-                                       BackgroundColor="{StaticResource BackgroundPrimary}"
+                                       VerticalOptions="Center"                                                                           
                                        FontAttributes="Bold"
                                        FontSize="20"/>
                                 <Frame.GestureRecognizers>
