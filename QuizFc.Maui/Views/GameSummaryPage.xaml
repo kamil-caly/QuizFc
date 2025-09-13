@@ -8,9 +8,9 @@
     <VerticalStackLayout VerticalOptions="Center"
                          HorizontalOptions="Center"
                          Spacing="30">
-        
+
         <Label Text="Podsumowanie"
-               HorizontalOptions="Center"
+               HorizontalOptions="Center"            
                FontSize="30"
                FontAttributes="Bold"
                TextColor="{StaticResource TextSecondary}" />
@@ -29,7 +29,7 @@
                     <Label Text="Wynik"
                            HeightRequest="50"
                            VerticalTextAlignment="Center"
-                           Margin="0 0 0 40"
+                           Margin="40, 0"
                            FontSize="20"
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextPrimary}"/>
@@ -44,7 +44,21 @@
                        HorizontalTextAlignment="Center"/>
             </Grid>
         </Frame>
-        
+
+        <Button Text="Zagraj jeszcze raz"
+                Clicked="PlayAgainOnClick"
+                BackgroundColor="{StaticResource ButtonYellow}"
+                FontAttributes="Bold"
+                FontSize="32"
+                CornerRadius="20"/>
+
+        <Button Text="Zmień grę"
+                Clicked="ChangeGameOnClick"
+                BackgroundColor="{StaticResource ButtonYellow}"
+                FontAttributes="Bold"
+                FontSize="32"
+                CornerRadius="20"/>
+
     </VerticalStackLayout>
     
 </ContentPage>

@@ -8,15 +8,24 @@ public partial class GameSummaryPage : ContentPage
 		InitializeComponent();
 	}
 
-    private string score;
+    private string score = default!;
     public string Score
     {
         get => score;
         set
         {
             score = value;
-            // tutaj masz ju¿ wynik
-            //ScoreLabel.Text = $"Twój wynik: {score}";
+            ScoreLabel.Text = score.ToString();
         }
+    }
+
+    private async void PlayAgainOnClick(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(WhoMoreQuizPage));
+    }
+
+    private async void ChangeGameOnClick(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//MainPage");
     }
 }
