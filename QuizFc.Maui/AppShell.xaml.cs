@@ -10,6 +10,7 @@ namespace QuizFc
 
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(WhoMoreQuizPage), typeof(WhoMoreQuizPage));
+            Routing.RegisterRoute(nameof(WhoMoreConfigPage), typeof(WhoMoreConfigPage));
             Routing.RegisterRoute(nameof(GameSummaryPage), typeof(GameSummaryPage));
         }
     }

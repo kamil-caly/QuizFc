@@ -1,4 +1,6 @@
-﻿namespace QuizFc
+﻿using QuizFc.Views;
+
+namespace QuizFc
 {
     public partial class MainPage : ContentPage
     {
@@ -9,7 +11,7 @@
 
         private async void OnWhoMoreQuizClicked(object sender, TappedEventArgs e)
         {
-            await Shell.Current.GoToAsync("WhoMoreQuizPage");
+            await Shell.Current.GoToAsync(nameof(WhoMoreConfigPage));
         }
     }
 }

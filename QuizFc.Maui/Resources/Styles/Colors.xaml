@@ -18,8 +18,11 @@
 
     <Color x:Key="BorderOpacityWhite">#90FFFFFF</Color>
     <Color x:Key="BorderPink">#b14ffb</Color>
+    <Color x:Key="BorderGreen">#008c09</Color>
 
     <Color x:Key="ButtonYellow">#ffdf7b</Color>
+    <Color x:Key="ButtonInactive">#302f2f</Color>
+    <Color x:Key="ButtonActive">#0c2a0e</Color>
 
     <Color x:Key="Red">#d00000</Color>
     <Color x:Key="Yellow">#ebc500</Color>

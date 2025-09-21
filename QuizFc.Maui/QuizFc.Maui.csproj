@@ -57,11 +57,14 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\AppIcon\arrow_back_red.svg" />
+	  <MauiImage Include="Resources\AppIcon\arrow_right.svg" />
+	  <MauiImage Include="Resources\AppIcon\arrow_left.svg" />
 	  <MauiImage Include="Resources\AppIcon\heart_black.svg" />
 	  <MauiImage Include="Resources\AppIcon\trophy_black.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
@@ -87,9 +90,16 @@
 	  <MauiXaml Update="Views\GameSummaryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\WhoMoreConfigPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\WhoMoreQuizPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Enums\" />
 	</ItemGroup>
 
 </Project>

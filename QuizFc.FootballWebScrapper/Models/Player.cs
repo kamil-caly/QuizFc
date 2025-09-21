@@ -11,5 +11,9 @@
         public string Club { get; set; } = default!;
         public string ClubImgUrl { get; set; } = default!;
         public decimal MarketValue { get; set; }
+        /// <summary>
+        /// Wysokość w centymetrach
+        /// </summary>
+        public int Height { get; set; }
     }
 }

@@ -55,7 +55,7 @@
         <Button Text="Zmień grę"
                 Clicked="ChangeGameOnClick"
                 BackgroundColor="{StaticResource ButtonYellow}"
-                FontAttributes="Bold"
+                FontAttributes="Bold"        
                 FontSize="32"
                 CornerRadius="20"/>
 

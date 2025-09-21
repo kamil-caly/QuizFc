@@ -1,12 +1,48 @@
+using QuizFc.Enums;
 using QuizFc.FootballWebScraper;
 using QuizFc.FootballWebScrapper.Models;
 
 namespace QuizFc.Views;
 
+
+[QueryProperty(nameof(Life), "Life")]
+[QueryProperty(nameof(SelectedCategory), "SelectedCategory")]
+[QueryProperty(nameof(SelectedLeague), "SelectedLeague")]
 public partial class WhoMoreQuizPage : ContentPage
 {
+    // Query parameters at first
+    private int lifePriv;
+    public int Life
+    {
+        get => lifePriv;
+        set
+        {
+            lifePriv = value;
+            LifeLabel.Text = lifePriv.ToString();
+        }
+    }
+
+    private WhoMoreCategory selectedCategoryPriv;
+    public WhoMoreCategory SelectedCategory
+    {
+        get => selectedCategoryPriv;
+        set
+        {
+            selectedCategoryPriv = value;
+        }
+    }
+
+    private League selectedLeaguePriv;
+    public League SelectedLeague
+    {
+        get => selectedLeaguePriv;
+        set
+        {
+            selectedLeaguePriv = value;
+        }
+    }
+
     private int HeighScore;
-    private int Life;
     private const string CardColorGreen = "player_card_green.png";
     private const string CardColorPurple = "player_card_purple.png";
     private const string CardColorRed = "player_card_red.png";
@@ -20,9 +56,7 @@ public partial class WhoMoreQuizPage : ContentPage
 		InitializeComponent();
         SetNewPlayers();
         HeighScore = 0;
-        Life = 3;
         ScoreLabel.Text = HeighScore.ToString();
-        LifeLabel.Text = Life.ToString();
     }
 
     private async Task SetNewPlayers()

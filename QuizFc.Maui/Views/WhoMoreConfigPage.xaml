@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuizFc.Views.WhoMoreConfigPage"
+             xmlns:local="clr-namespace:QuizFc.Components"           
+             Title="WhoMoreConfigPage"
+             Background="{StaticResource BackgroundSecondary}">
+    <VerticalStackLayout>
+        <!-- Navbar jako osobny komponent -->
+        <local:Navbar />
+
+        <Label Text="Kto Więcej?"
+               Margin="0, 20, 0, 30"
+               HorizontalOptions="Center"            
+               FontSize="30"
+               FontAttributes="Bold"
+               TextColor="{StaticResource TextSecondary}" />
+
+        <Label Text="Wskaż, która karta ma większą wartość"               
+               HorizontalOptions="Center"            
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="{StaticResource TextSecondary}" />
+
+        <Label Text="Wybierz kategorię"
+               Margin="0, 20"
+               HorizontalOptions="Center"            
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="{StaticResource TextSecondary}" />
+
+        <!-- Kategoria -->
+        <HorizontalStackLayout HorizontalOptions="Center" 
+                               Spacing="16">
+            <Button x:Name="MarketValueBtn"
+                    Text="Wartość rynkowa"
+                    BorderColor="{StaticResource BorderGreen}"
+                    TextColor="{StaticResource TextSecondary}"
+                    Command="{Binding CategoryCommand}" 
+                    CommandParameter="marketValue"
+                    CornerRadius="20"
+                    FontAttributes="Bold"/>
+            <Button x:Name="AgeBtn"
+                    Text="Wiek"
+                    BorderColor="{StaticResource BorderGreen}"
+                    TextColor="{StaticResource TextSecondary}"
+                    Command="{Binding CategoryCommand}" 
+                    CommandParameter="age"
+                    CornerRadius="20"
+                    FontAttributes="Bold"/>
+            <Button x:Name="HeightBtn"
+                    Text="Wzrost"
+                    BorderColor="{StaticResource BorderGreen}"
+                    TextColor="{StaticResource TextSecondary}"
+                    Command="{Binding CategoryCommand}" 
+                    CommandParameter="height"
+                    CornerRadius="20"
+                    FontAttributes="Bold"/>
+        </HorizontalStackLayout>
+
+        <Button x:Name="DifferentBtn"
+                Text="Mieszane"
+                Margin="0, 20"
+                WidthRequest="96"              
+                BorderColor="{StaticResource BorderGreen}"
+                TextColor="{StaticResource TextSecondary}"
+                Command="{Binding CategoryCommand}" 
+                CommandParameter="different"
+                CornerRadius="20"
+                FontAttributes="Bold"/>
+
+        <Label Text="Wybierz ligę"               
+               HorizontalOptions="Center"
+               Margin="0 ,0 ,0 ,20"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="{StaticResource TextSecondary}" />
+
+        <!-- Liga -->
+        <HorizontalStackLayout HorizontalOptions="Center" 
+                               Spacing="16">
+            <Button Text="Premier League"
+                    x:Name="PLBtn"
+                    BorderColor="{StaticResource BorderGreen}"
+                    BackgroundColor="{StaticResource ButtonInactive}"
+                    TextColor="{StaticResource TextSecondary}"
+                    Command="{Binding LeagueCommand}" 
+                    CommandParameter="pl"
+                    CornerRadius="20"
+                    FontAttributes="Bold"/>
+            <Button Text="Bundesliga"
+                    x:Name="BLBtn"
+                    BorderColor="{StaticResource BorderGreen}"
+                    BackgroundColor="{StaticResource ButtonInactive}"
+                    TextColor="{StaticResource TextSecondary}"
+                    Command="{Binding LeagueCommand}" 
+                    CommandParameter="bl"
+                    CornerRadius="20"
+                    FontAttributes="Bold"/>
+            <Button Text="La Liga"
+                    x:Name="LLBtn"
+                    BorderColor="{StaticResource BorderGreen}"
+                    BackgroundColor="{StaticResource ButtonInactive}"
+                    TextColor="{StaticResource TextSecondary}"
+                    Command="{Binding LeagueCommand}" 
+                    CommandParameter="ll"
+                    CornerRadius="20"
+                    FontAttributes="Bold"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center" 
+                               Spacing="16"
+                               Margin="0, 20, 0, 0">
+            <Button Text="Serie A"
+                    x:Name="SABtn"
+                    BorderColor="{StaticResource BorderGreen}"
+                    BackgroundColor="{StaticResource ButtonInactive}"
+                    TextColor="{StaticResource TextSecondary}"
+                    Command="{Binding LeagueCommand}" 
+                    CommandParameter="sa"
+                    CornerRadius="20"
+                    FontAttributes="Bold"/>
+            <Button Text="Ligue 1"
+                    x:Name="L1Btn"
+                    BorderColor="{StaticResource BorderGreen}"
+                    BackgroundColor="{StaticResource ButtonInactive}"
+                    TextColor="{StaticResource TextSecondary}"
+                    Command="{Binding LeagueCommand}" 
+                    CommandParameter="l1"
+                    CornerRadius="20"
+                    FontAttributes="Bold"/>
+            <Button Text="Cały świat"
+                    x:Name="WholeWorldBtn"
+                    BorderColor="{StaticResource BorderGreen}"
+                    BackgroundColor="{StaticResource ButtonInactive}"
+                    TextColor="{StaticResource TextSecondary}"
+                    Command="{Binding LeagueCommand}" 
+                    CommandParameter="all"
+                    CornerRadius="20"
+                    FontAttributes="Bold"/>
+        </HorizontalStackLayout>
+
+        <!-- Liczba szans -->
+        <HorizontalStackLayout Margin="0,20,0,0" 
+                       HorizontalOptions="Center"
+                       Spacing="0">
+
+            <!-- Lewa strzałka -->
+            <Frame HasShadow="False"
+                   Padding="0"
+                   BorderColor="{x:Null}"
+                   BackgroundColor="Transparent"
+                   HeightRequest="40"
+                   WidthRequest="40"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Image Source="arrow_left.svg"
+                       HeightRequest="70"
+                       WidthRequest="70"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding ChanceCounterCommand}" 
+                            CommandParameter="left"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
+
+            <!-- Tekst -->
+            <Label Text="Liczba szans"               
+           VerticalOptions="Center"
+           FontSize="20"
+           FontAttributes="Bold"
+           TextColor="{StaticResource TextSecondary}" />
+
+            <!-- Prawa strzałka -->
+            <Frame HasShadow="False"
+                   Padding="0"
+                   BorderColor="{x:Null}"
+                   BackgroundColor="Transparent"
+                   HeightRequest="40"
+                   WidthRequest="40"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Image Source="arrow_right.svg"
+                       HeightRequest="70"
+                       WidthRequest="70"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding ChanceCounterCommand}" 
+                            CommandParameter="right"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
+
+        </HorizontalStackLayout>
+
+        <Button x:Name="ChanceCounterBtn"
+                Margin="0, 20"
+                WidthRequest="60"
+                IsEnabled="False"
+                BackgroundColor="{StaticResource ButtonActive}"
+                BorderColor="{StaticResource BorderGreen}"
+                BorderWidth="2"
+                TextColor="{StaticResource TextSecondary}"
+                CornerRadius="20"
+                FontAttributes="Bold"/>
+
+        <Button Text="START"
+                Margin="0, 60"
+                WidthRequest="160"
+                Clicked="PlayQuizClick"
+                BackgroundColor="{StaticResource ButtonYellow}"
+                FontAttributes="Bold"
+                FontSize="40"
+                CornerRadius="20"/>
+
+    </VerticalStackLayout>
+</ContentPage>
