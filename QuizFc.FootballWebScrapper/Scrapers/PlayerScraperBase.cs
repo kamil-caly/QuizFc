@@ -59,15 +59,6 @@ namespace QuizFc.FootballWebScraper.Scrapers
                 // Wzrost
                 var playerUrl = transfermarktUrlBase + Regex.Match(randomPlayerTR.ChildNodes[2].QuerySelector("a").OuterHtml, "href=\"([^\"]+)\"").Groups[1].Value;
                 HtmlWeb web = new HtmlWeb();
-                web.PreRequest = request => // w celu zapobiegnięcia błędu: 403
-                {
-                    request.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-                                                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
-                                                    "Chrome/124.0.0.0 Safari/537.36";
-                    request.Headers["Accept-Language"] = "pl-PL,pl;q=0.9,en;q=0.8";
-                    request.Headers["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-                    return true;
-                };
                 Thread.Sleep(500); // w celu zapobiegnięcia błędu: 403
                 HtmlDocument htmlDoc;
                 try

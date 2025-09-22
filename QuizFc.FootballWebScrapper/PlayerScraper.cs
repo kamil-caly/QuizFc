@@ -161,6 +161,7 @@ namespace QuizFc.FootballWebScraper
             {
                 case League.All:
                     player1 = await allLeaguesPlayerScrapper.GetRandomPlayer(category);
+                    player2 = await allLeaguesPlayerScrapper.GetRandomPlayer(category, player1);
                     break;
                 case League.PremierLeague:
                     player1 = await premierLeaguePlayerScraper.GetRandomPlayer(category);
@@ -169,7 +170,6 @@ namespace QuizFc.FootballWebScraper
                     throw new NotImplementedException();
             }
 
-            //player2 = await GetRandomPlayer(player1.MarketValue);
             return (player1, player2);
         }
     }
