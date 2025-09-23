@@ -30,7 +30,7 @@ namespace QuizFc.FootballWebScraper.Scrapers
                 case PitchPosition.Attacker:
                 case PitchPosition.Midfielder:
                 case PitchPosition.Defender:
-                    return GetRandomPageNumber(maxPageNumber);
+                    return GetRandomPageNumber(maxPageNumber, firstStep);
                 case PitchPosition.GoalKeeper:
                     return GetRandomPageNumber(maxPageNumber, firstStep);
                 default:
@@ -50,7 +50,15 @@ namespace QuizFc.FootballWebScraper.Scrapers
             // Zdjęcie narodowości
             player.NationalityImgUrl = randomPlayerTR.ChildNodes[3].QuerySelector("img").GetAttributeValue("src", "").Replace("verysmall", "medium");
             // Wartość rynkowa
-            player.MarketValue = decimal.Parse(randomPlayerTR.ChildNodes[6].QuerySelector("a").InnerHtml.Split(" ")[0]);
+            string marketValueTxt = randomPlayerTR.ChildNodes[6].QuerySelector("a").InnerHtml;
+            if (marketValueTxt.Contains("tys"))
+            {
+                player.MarketValue = decimal.Parse("0," + marketValueTxt.Split(" ")[0]);
+            }
+            else
+            {
+                player.MarketValue = decimal.Parse(marketValueTxt.Split(" ")[0]);
+            }
             // Wiek
             player.Age = int.Parse(randomPlayerTR.ChildNodes[4].InnerHtml);
             

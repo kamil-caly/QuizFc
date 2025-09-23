@@ -4,8 +4,8 @@ using QuizFc.FootballWebScrapper.Models;
 
 for (int i = 0; i < 20; i++)
 {
-    Thread.Sleep(400);
-    (Player player1, Player player2) = await PlayerScraper.Get2PlayersWithDifferendCategoryValue(League.All, WhoMoreCategory.Height);
+    Thread.Sleep(2000);
+    (Player player1, Player player2) = await PlayerScraper.Get2PlayersWithDifferendCategoryValue(League.SerieA, WhoMoreCategory.Age);
     //Console.WriteLine($"{player1.Name} ({player1.MarketValue}M) vs {player2.Name} ({player2.MarketValue}M)");
     // wypisz w konsoli wszystkie atrybuty player 1 w kolejnych liniach
     Console.WriteLine("Player 1:");

@@ -6,16 +6,16 @@ using System.Text.RegularExpressions;
 
 namespace QuizFc.FootballWebScraper.Scrapers
 {
-    public class PremierLeaguePlayerScraper : PlayerScraperBase
+    public class Ligue1PlayerScraper : PlayerScraperBase
     {
         // max 4 pages
-        private const string TopValuableAttackers = "https://www.transfermarkt.pl/premier-league/marktwerte/wettbewerb/GB1/ajax/yw1/pos/Sturm/detailpos//altersklasse/alle/land_id/0/plus//galerie/0/page/";
+        private const string TopValuableAttackers = "https://www.transfermarkt.pl/ligue-1/marktwerte/wettbewerb/FR1/ajax/yw1/pos/Sturm/detailpos//altersklasse/alle/land_id/0/plus//galerie/0/page/";
         // max 4 pages
-        private const string TopValuableMidfielders = "https://www.transfermarkt.pl/premier-league/marktwerte/wettbewerb/GB1/pos/Mittelfeld/detailpos//altersklasse/alle/land_id/0/plus//galerie/0/page/";
+        private const string TopValuableMidfielders = "https://www.transfermarkt.pl/ligue-1/marktwerte/wettbewerb/FR1/ajax/yw1/pos/Mittelfeld/detailpos//altersklasse/alle/land_id/0/plus//galerie/0/page/";
         // max 4 pages
-        private const string TopValuableDefenders = "https://www.transfermarkt.pl/premier-league/marktwerte/wettbewerb/GB1/pos/Abwehr/detailpos//altersklasse/alle/land_id/0/plus//galerie/0/page/";
-        // max 3 pages but 3 page players is not so valuable (we have to decrease chance to get player from this page)
-        private const string TopValuableGoalKeepers = "https://www.transfermarkt.pl/premier-league/marktwerte/wettbewerb/GB1/pos/Torwart/detailpos//altersklasse/alle/land_id/0/plus//galerie/0/page/";
+        private const string TopValuableDefenders = "https://www.transfermarkt.pl/ligue-1/marktwerte/wettbewerb/FR1/ajax/yw1/pos/Abwehr/detailpos//altersklasse/alle/land_id/0/plus//galerie/0/page/";
+        // max 3 pages
+        private const string TopValuableGoalKeepers = "https://www.transfermarkt.pl/ligue-1/marktwerte/wettbewerb/FR1/ajax/yw1/pos/Torwart/detailpos//altersklasse/alle/land_id/0/plus//galerie/0/page/";
 
         public async Task<Player> GetRandomPlayer(WhoMoreCategory category)
         {
@@ -30,7 +30,7 @@ namespace QuizFc.FootballWebScraper.Scrapers
                 GetRandomPage(
                     position, 
                     position == PitchPosition.GoalKeeper ? 3 : 4,
-                    position == PitchPosition.GoalKeeper ? 3 : null
+                    position == PitchPosition.GoalKeeper ? 1 : null
                 );
 
             url += pageNumber.ToString();
