@@ -113,7 +113,7 @@
                        FontSize="22"
                        FontAttributes="Bold"/>
                 <Label x:Name="CategoryLbl"
-                       Text="droższy"
+                       Text="..."
                        HorizontalOptions="Center"
                        FontSize="22"
                        FontAttributes="Bold"
@@ -204,7 +204,7 @@
                                    CornerRadius="50"
                                    Padding="0">
                                 <Label Text="?"
-                                       x:Name="MarketValueP1"
+                                       x:Name="CategoryValueP1"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"                                                                           
                                        FontAttributes="Bold"
@@ -299,7 +299,7 @@
                                    CornerRadius="50"
                                    Padding="0">
                                 <Label Text="?"
-                                       x:Name="MarketValueP2"
+                                       x:Name="CategoryValueP2"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center"                                                                           
                                        FontAttributes="Bold"

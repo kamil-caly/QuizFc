@@ -1,64 +1,25 @@
 using QuizFc.Enums;
 using QuizFc.FootballWebScraper;
 using QuizFc.FootballWebScrapper.Models;
+using QuizFc.Helpers;
 
 namespace QuizFc.Views;
 
 
-[QueryProperty(nameof(Life), "Life")]
-[QueryProperty(nameof(SelectedCategory), "SelectedCategory")]
-[QueryProperty(nameof(SelectedLeague), "SelectedLeague")]
+[QueryProperty(nameof(LifeParam), "Life")]
+[QueryProperty(nameof(CategoryParam), "Category")]
+[QueryProperty(nameof(LeagueParam), "League")]
 public partial class WhoMoreQuizPage : ContentPage
 {
-    // Query parameters at first
-    private int lifePriv;
-    public int Life
-    {
-        get => lifePriv;
-        set
-        {
-            lifePriv = value;
-            LifeLabel.Text = lifePriv.ToString();
-        }
-    }
+    public string LifeParam { get; set; } = default!;
+    public string CategoryParam { get; set; } = default!;
+    public string LeagueParam { get; set; } = default!;
 
-    private WhoMoreCategory selectedCategoryPriv;
-    public WhoMoreCategory SelectedCategory
-    {
-        get 
-        {
-            if (selectedCategoryPriv == WhoMoreCategory.Random)
-            {
-                Random rand = new Random();
-                switch (rand.Next(1, 4))
-                {
-                    case 1:
-                        return WhoMoreCategory.MarketValue;
-                    case 2:
-                        return WhoMoreCategory.Age;
-                    case 3:
-                        return WhoMoreCategory.Height;
-                }
-            }
+    public int Life { get; private set; }
+    public WhoMoreCategory SelectedCategory { get; private set; }
+    public League SelectedLeague { get; private set; }
 
-            return selectedCategoryPriv;
-        }
-        set
-        {
-            selectedCategoryPriv = value;
-        }
-    }
-
-    private League selectedLeaguePriv;
-    public League SelectedLeague
-    {
-        get => selectedLeaguePriv;
-        set
-        {
-            selectedLeaguePriv = value;
-        }
-    }
-
+    private WhoMoreCategory CurrentQuestionCategory;
     private int HeighScore;
     private const string CardColorGreen = "player_card_green.png";
     private const string CardColorPurple = "player_card_purple.png";
@@ -69,11 +30,20 @@ public partial class WhoMoreQuizPage : ContentPage
     private Player? currentPlayer2 = null;
 
     public WhoMoreQuizPage()
-	{
+    {
 		InitializeComponent();
-        SetNewPlayers();
-        HeighScore = 0;
-        ScoreLabel.Text = HeighScore.ToString();
+    }
+
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Life = int.TryParse(LifeParam, out int life) ? life : 1;
+        SelectedCategory = int.TryParse(CategoryParam, out int cat) ? (WhoMoreCategory)cat : WhoMoreCategory.MarketValue;
+        SelectedLeague = int.TryParse(LeagueParam, out int league) ? (League)league : League.PremierLeague;
+
+        LifeLabel.Text = Life.ToString();
+        await SetNewPlayers();
     }
 
     private async Task SetNewPlayers()
@@ -81,7 +51,25 @@ public partial class WhoMoreQuizPage : ContentPage
         FirstPlayerCardImg.Source = CardColorPurple;
         SecondPlayerCardImg.Source = CardColorPurple;
 
-        var category = SelectedCategory;
+        WhoMoreCategory category = SelectedCategory;
+        if (SelectedCategory == WhoMoreCategory.Random)
+        {
+            Random rand = new Random();
+            switch (rand.Next(1, 4))
+            {
+                case 1:
+                    category = WhoMoreCategory.MarketValue;
+                    break;
+                case 2:
+                    category = WhoMoreCategory.Age;
+                    break;
+                case 3:
+                    category = WhoMoreCategory.Height;
+                    break;
+            }
+        }
+
+        CurrentQuestionCategory = category;
         (Player player, Player player2) = await PlayerScraper.Get2PlayersWithDifferendCategoryValue(SelectedLeague, category);
 
         switch (category)
@@ -109,7 +97,7 @@ public partial class WhoMoreQuizPage : ContentPage
         NameP1.Text = player.Name;
         NameP2.Text = player2.Name;
 
-        MarketValueP1.Text = MarketValueP2.Text = "?";
+        CategoryValueP1.Text = CategoryValueP2.Text = "?";
 
         CanCardClick = true;
         FirstCardFrame.IsVisible = SecondCardFrame.IsVisible = true;
@@ -118,13 +106,34 @@ public partial class WhoMoreQuizPage : ContentPage
     private void OnCardClickedLogic(int card)
     {
         if (currentPlayer1 == null || currentPlayer2 == null) return;
+        decimal value = 0m;
+        decimal value2 = 0m;
 
-        MarketValueP1.Text = $"{currentPlayer1.MarketValue}M";
-        MarketValueP2.Text = $"{currentPlayer2.MarketValue}M";
+        switch (CurrentQuestionCategory)
+        {
+            case WhoMoreCategory.MarketValue:
+                CategoryValueP1.Text = $"{currentPlayer1.MarketValue}M";
+                CategoryValueP2.Text = $"{currentPlayer2.MarketValue}M";
+                value = currentPlayer1.MarketValue;
+                value2 = currentPlayer2.MarketValue;
+                break;
+            case WhoMoreCategory.Age:
+                CategoryValueP1.Text = $"{currentPlayer1.Age} {Tools.MapPlayerAgeToTxt(currentPlayer1.Age)}";
+                CategoryValueP2.Text = $"{currentPlayer2.Age} {Tools.MapPlayerAgeToTxt(currentPlayer2.Age)}";
+                value = (decimal)currentPlayer1.Age;
+                value2 = (decimal)currentPlayer2.Age;
+                break;
+            case WhoMoreCategory.Height:
+                CategoryValueP1.Text = $"{currentPlayer1.Height}cm";
+                CategoryValueP2.Text = $"{currentPlayer2.Height}cm";
+                value = (decimal)currentPlayer1.Height;
+                value2 = (decimal)currentPlayer2.Height;
+                break;
+        }
 
         if (card == 1)
         {
-            if (currentPlayer1.MarketValue > currentPlayer2.MarketValue)
+            if (value > value2)
             {
                 FirstPlayerCardImg.Source = CardColorGreen;
                 HeighScore++;
@@ -137,7 +146,7 @@ public partial class WhoMoreQuizPage : ContentPage
         }
         else
         {
-            if (currentPlayer2.MarketValue > currentPlayer1.MarketValue)
+            if (value2 > value)
             {
                 SecondPlayerCardImg.Source = CardColorGreen;
                 HeighScore++;
@@ -171,6 +180,7 @@ public partial class WhoMoreQuizPage : ContentPage
             return;
         }
         FirstCardFrame.IsVisible = SecondCardFrame.IsVisible = false;
+        CategoryLbl.Text = "...";
         await SetNewPlayers();
         CanCardClick = true;
     }
@@ -188,6 +198,7 @@ public partial class WhoMoreQuizPage : ContentPage
             return;
         }
         FirstCardFrame.IsVisible = SecondCardFrame.IsVisible = false;
+        CategoryLbl.Text = "...";
         await SetNewPlayers();
         CanCardClick = true;
     }

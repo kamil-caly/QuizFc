@@ -21,7 +21,7 @@ public partial class GameSummaryPage : ContentPage
 
     private async void PlayAgainOnClick(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(WhoMoreQuizPage));
+        await Shell.Current.GoToAsync(nameof(WhoMoreConfigPage));
     }
 
     private async void ChangeGameOnClick(object sender, EventArgs e)

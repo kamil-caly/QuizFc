@@ -110,6 +110,6 @@ public partial class WhoMoreConfigPage : ContentPage
     private async void PlayQuizClick(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync($"{nameof(WhoMoreQuizPage)}?" +
-            $"Life={ChanceCounter}&SelectedCategory={SelectedCategory}&SelectedLeague={SelectedLeague}");
+            $"Life={ChanceCounter}&Category={(int)SelectedCategory}&League={(int)SelectedLeague}");
     }
 }
