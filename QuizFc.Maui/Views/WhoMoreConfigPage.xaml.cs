@@ -42,7 +42,7 @@ public partial class WhoMoreConfigPage : ContentPage
             { "marketValue", (MarketValueBtn, WhoMoreCategory.MarketValue) },
             { "age", (AgeBtn, WhoMoreCategory.Age) },
             { "height", (HeightBtn, WhoMoreCategory.Height) },
-            { "different", (DifferentBtn, WhoMoreCategory.Different) }
+            { "random", (RandomCategoryBtn, WhoMoreCategory.Random) }
         };
 
         if (!map.TryGetValue(parameter, out var selected))
@@ -60,7 +60,7 @@ public partial class WhoMoreConfigPage : ContentPage
         var activeColor = (Color)Application.Current!.Resources["ButtonActive"];
         var inactiveColor = (Color)Application.Current!.Resources["ButtonInactive"];
 
-        foreach (var btn in new[] { MarketValueBtn, AgeBtn, HeightBtn, DifferentBtn })
+        foreach (var btn in new[] { MarketValueBtn, AgeBtn, HeightBtn, RandomCategoryBtn })
         {
             btn.BackgroundColor = inactiveColor;
             btn.BorderWidth = 0;

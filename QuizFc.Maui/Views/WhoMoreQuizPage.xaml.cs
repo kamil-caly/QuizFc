@@ -25,7 +25,24 @@ public partial class WhoMoreQuizPage : ContentPage
     private WhoMoreCategory selectedCategoryPriv;
     public WhoMoreCategory SelectedCategory
     {
-        get => selectedCategoryPriv;
+        get 
+        {
+            if (selectedCategoryPriv == WhoMoreCategory.Random)
+            {
+                Random rand = new Random();
+                switch (rand.Next(1, 4))
+                {
+                    case 1:
+                        return WhoMoreCategory.MarketValue;
+                    case 2:
+                        return WhoMoreCategory.Age;
+                    case 3:
+                        return WhoMoreCategory.Height;
+                }
+            }
+
+            return selectedCategoryPriv;
+        }
         set
         {
             selectedCategoryPriv = value;
@@ -64,7 +81,21 @@ public partial class WhoMoreQuizPage : ContentPage
         FirstPlayerCardImg.Source = CardColorPurple;
         SecondPlayerCardImg.Source = CardColorPurple;
 
-        (Player player, Player player2) = await PlayerScraper.Get2PlayersWithDifferendMarketValue();
+        var category = SelectedCategory;
+        (Player player, Player player2) = await PlayerScraper.Get2PlayersWithDifferendCategoryValue(SelectedLeague, category);
+
+        switch (category)
+        {
+            case WhoMoreCategory.MarketValue:
+                CategoryLbl.Text = "dro¿szy";
+                break;
+            case WhoMoreCategory.Age:
+                CategoryLbl.Text = "starszy";
+                break;
+            case WhoMoreCategory.Height:
+                CategoryLbl.Text = "wy¿szy";
+                break;
+        }
 
         currentPlayer1 = player;
         currentPlayer2 = player2;

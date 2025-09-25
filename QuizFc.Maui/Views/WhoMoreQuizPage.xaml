@@ -112,7 +112,8 @@
                        TextColor="{StaticResource White}"
                        FontSize="22"
                        FontAttributes="Bold"/>
-                <Label Text="droższy"
+                <Label x:Name="CategoryLbl"
+                       Text="droższy"
                        HorizontalOptions="Center"
                        FontSize="22"
                        FontAttributes="Bold"

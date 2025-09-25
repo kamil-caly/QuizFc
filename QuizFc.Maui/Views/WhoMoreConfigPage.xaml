@@ -58,14 +58,14 @@
                     FontAttributes="Bold"/>
         </HorizontalStackLayout>
 
-        <Button x:Name="DifferentBtn"
+        <Button x:Name="RandomCategoryBtn"
                 Text="Mieszane"
                 Margin="0, 20"
                 WidthRequest="96"              
                 BorderColor="{StaticResource BorderGreen}"
                 TextColor="{StaticResource TextSecondary}"
                 Command="{Binding CategoryCommand}" 
-                CommandParameter="different"
+                CommandParameter="random"
                 CornerRadius="20"
                 FontAttributes="Bold"/>
 

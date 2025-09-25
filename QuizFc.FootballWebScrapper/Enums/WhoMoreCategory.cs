@@ -4,6 +4,7 @@
     {
         MarketValue,
         Age,
-        Height
+        Height,
+        Random
     }
 }
